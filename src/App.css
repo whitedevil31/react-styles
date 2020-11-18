@@ -25,14 +25,14 @@
 }
 .header-left {
   display: flex;
-  width: 25%;
+  width: 45%;
   height: 100%;
   align-items: center;
   justify-content: space-around;
   margin-right: 15px;
 }
 .header-logo {
-  width: 75%;
+  width: 55%;
 }
 a {
   font-weight: bold;
