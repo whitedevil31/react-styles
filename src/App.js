@@ -64,8 +64,8 @@ function App() {
   const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        clearInput();
         setUser(user);
+        clearInput();
       } else {
         setUser("");
       }
@@ -77,18 +77,24 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Login
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        handleLogin={handleLogin}
-        handleSignUp={handleSignUp}
-        hasAccount={hasAccount}
-        setHasAccount={setHasAccount}
-        emailError={emailError}
-        passwordError={passwordError}
-      />
+      {user ? (
+        <Home handleLogout={handleLogout} />
+      ) : (
+        <Login
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          handleLogin={handleLogin}
+          handleSignUp={handleSignUp}
+          hasAccount={hasAccount}
+          setHasAccount={setHasAccount}
+          emailError={emailError}
+          passwordError={passwordError}
+          clearInput={clearInput}
+          clearError={clearError}
+        />
+      )}
     </div>
   );
 }

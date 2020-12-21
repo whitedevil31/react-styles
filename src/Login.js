@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 const Login = (props) => {
   const {
     setEmail,
+    email,
     password,
     setPassword,
     handleLogin,
@@ -10,7 +11,13 @@ const Login = (props) => {
     setHasAccount,
     emailError,
     passwordError,
+    clearInput,
+    clearError,
   } = props;
+  const methodChange = () => {
+    setHasAccount(!hasAccount);
+    clearInput();
+  };
   return (
     <section className="login">
       <div className="loginContainer">
@@ -23,6 +30,7 @@ const Login = (props) => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <p className="errorMsg">{emailError}</p>
+        <label>Password</label>
         <input
           type="password"
           required
@@ -36,15 +44,14 @@ const Login = (props) => {
               <button onClick={handleLogin}>Sign in </button>
               <p>
                 Do not have a accout ?
-                <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
+                <span onClick={methodChange}>Sign up</span>
               </p>
             </>
           ) : (
             <>
               <button onClick={handleSignUp}>Sign up</button>
               <p>
-                Have a account ?
-                <span onClick={() => setHasAccount(!hasAccount)}>Sign in </span>
+                Have a account ?<span onClick={methodChange}>Sign in </span>
               </p>
             </>
           )}
