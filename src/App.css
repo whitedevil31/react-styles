@@ -3,12 +3,43 @@
   padding: 0px;
 }
 
-.container {
-  height: 100vh;
-  width: 100%;
+.container-js {
+  height: 70vh;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid red;
+  align-items: flex-start;
 }
 
-.header {
+.market {
+  position: absolute;
+  width: 281px;
+  height: 281px;
+  left: 47px;
+  top: 86px;
+  filter: drop-shadow(5px 4px 30px rgba(0, 0, 0, 0.25));
+}
+.parent {
+  height: 75vh;
+  width: 75vw;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: chartreuse;
+  display: flex;
+}
+.parenth1 {
+  position: absolute;
+  top: 25px;
+  left: 10px;
+}
+.childh1 {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+.header-js {
   display: flex;
   width: 100%;
   height: 10vh;
@@ -17,21 +48,21 @@
   align-items: center;
 }
 
-.logo {
+.logo-js {
   margin-top: 5px;
   height: 70px;
   width: 70px;
   border-radius: 30px;
 }
-.header-left {
+.header-left-js {
   display: flex;
   width: 45%;
   height: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-right: 15px;
 }
-.header-logo {
+.header-logo-js {
   width: 55%;
 }
 a {
@@ -39,4 +70,18 @@ a {
   font-size: 115%;
   text-decoration: none;
   color: black;
+}
+
+.dropDown {
+  color: black;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
