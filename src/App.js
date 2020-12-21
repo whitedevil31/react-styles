@@ -1,27 +1,94 @@
-import React, { useState } from "react";
-import { Button, Menu, MenuItem } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+
 import "./App.css";
-import logo from "./logo.jpg";
-import market from "./market.svg";
+import fire from "./fire";
+import Login from "./Login";
+import Home from "./Home";
 
 function App() {
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [hasAccount, setHasAccount] = useState(false);
+  const clearInput = () => {
+    setEmail("");
+    setPassword("");
+  };
 
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+  const clearError = () => {
+    setEmailError("");
+    setPasswordError("");
+  };
 
-  // const obl = { name: "my name is nanda" };
+  const handleLogin = () => {
+    clearError();
+    fire
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+            setEmailError(err.message);
+            break;
+          case "auth/wrong-password":
+            setPasswordError(err.message);
+        }
+      });
+  };
 
-  // const [click, setClick] = useState("");
-  // console.log(click);
+  const handleSignUp = () => {
+    clearError();
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/invalid-email":
+          case "auth/email-already-in-use":
+            setEmailError(err.message);
+            break;
+          case "auth/weak-password":
+            setPasswordError(err.message);
+        }
+      });
+  };
+
+  const handleLogout = () => {
+    fire.auth().signOut();
+  };
+
+  const authListener = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        clearInput();
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    authListener();
+  }, []);
   return (
-    <div className="container-js">
-      <h1>parent</h1>
-      <h1>child</h1>
+    <div className="App">
+      <Login
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        handleLogin={handleLogin}
+        handleSignUp={handleSignUp}
+        hasAccount={hasAccount}
+        setHasAccount={setHasAccount}
+        emailError={emailError}
+        passwordError={passwordError}
+      />
     </div>
   );
 }
