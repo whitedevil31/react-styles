@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import fire from "./fire";
 import Login from "./Login";
+import firebase from "firebase";
 import Home from "./Home";
 
 function App() {
@@ -12,6 +13,22 @@ function App() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const googleSubmit = () => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    fire
+      .auth()
+      .signInWithPopup(provider)
+      .then(function (result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   const clearInput = () => {
     setEmail("");
     setPassword("");
@@ -93,6 +110,7 @@ function App() {
           passwordError={passwordError}
           clearInput={clearInput}
           clearError={clearError}
+          googleSubmit={googleSubmit}
         />
       )}
     </div>

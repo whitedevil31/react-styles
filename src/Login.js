@@ -12,7 +12,7 @@ const Login = (props) => {
     emailError,
     passwordError,
     clearInput,
-    clearError,
+    googleSubmit,
   } = props;
   const methodChange = () => {
     setHasAccount(!hasAccount);
@@ -38,6 +38,9 @@ const Login = (props) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <p className="errorMsg">{passwordError}</p>
+        <button className="googleSignIn" onClick={googleSubmit}>
+          SIGN IN WITH GOOGLE
+        </button>
         <div className="btnContainer">
           {hasAccount ? (
             <>
