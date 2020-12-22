@@ -13,6 +13,7 @@ function App() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const titleKey = process.env.REACT_APP_KEY;
   const googleSubmit = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
     fire

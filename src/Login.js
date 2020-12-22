@@ -38,9 +38,8 @@ const Login = (props) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <p className="errorMsg">{passwordError}</p>
-        <button className="googleSignIn" onClick={googleSubmit}>
-          SIGN IN WITH GOOGLE
-        </button>
+        <h4 onClick={googleSubmit}>Sign in with google</h4>
+
         <div className="btnContainer">
           {hasAccount ? (
             <>
